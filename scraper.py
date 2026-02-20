@@ -9,7 +9,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
 # ================= SETTINGS =================
-page_number = 63
+page_number = 1
 MAIN_URL = "https://njavtv.com/en/actresses?page=" + str(page_number)
 PROXY_URL = "https://proxyorb.com/"
 SAVE_FOLDER = "pornstars"
@@ -36,31 +36,31 @@ wait = WebDriverWait(driver, 20)
 
 try:
     # ================= OPEN PROXY =================
-    driver.get(PROXY_URL)
+    driver.get(MAIN_URL)
     time.sleep(5)
 
-    url_input = wait.until(
-        EC.presence_of_element_located((By.NAME, "input"))
-    )
+    # url_input = wait.until(
+    #     EC.presence_of_element_located((By.NAME, "input"))
+    # )
 
-    url_input.clear()
-    url_input.send_keys(MAIN_URL)
+    # url_input.clear()
+    # url_input.send_keys(MAIN_URL)
 
-    submit_btn = driver.find_element(By.CSS_SELECTOR, "button[type='submit']")
-    submit_btn.click()
+    # submit_btn = driver.find_element(By.CSS_SELECTOR, "button[type='submit']")
+    # submit_btn.click()
 
-    time.sleep(8)
+    # time.sleep(8)
 
-    # Close popup if exists
-    try:
-        skip_btn = wait.until(
-            EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Skip')]"))
-        )
-        skip_btn.click()
-    except:
-        pass
+    # # Close popup if exists
+    # try:
+    #     skip_btn = wait.until(
+    #         EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Skip')]"))
+    #     )
+    #     skip_btn.click()
+    # except:
+    #     pass
 
-    time.sleep(5)
+    # time.sleep(5)
 
     # ================= PAGINATION LOOP =================
     while True:
