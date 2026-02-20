@@ -9,7 +9,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
 # ================= SETTINGS =================
-page_number = 63
+page_number = 1
 MAIN_URL = "https://njavtv.com/en/actresses?page=" + str(page_number)
 PROXY_URL = "https://proxyorb.com/"
 SAVE_FOLDER = "pornstars"
