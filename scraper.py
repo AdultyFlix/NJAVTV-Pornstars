@@ -20,20 +20,24 @@ if not os.path.exists(SAVE_FOLDER):
 
 # ================= CHROME OPTIONS =================
 options = Options()
-options.add_argument("--no-sandbox")
+
+# ❌ NO HEADLESS
+# options.add_argument("--headless=new")
+
+options.add_argument("--start-maximized")
 options.add_argument("--disable-dev-shm-usage")
-options.add_argument("--disable-gpu")
-options.add_argument("--window-size=1920,1080")
+options.add_argument("--remote-allow-origins=*")
 
 # Auto install correct ChromeDriver
 service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service, options=options)
-wait = WebDriverWait(driver, 15)
+
+wait = WebDriverWait(driver, 20)
 
 try:
     # ================= OPEN PROXY =================
     driver.get(PROXY_URL)
-    time.sleep(3)
+    time.sleep(5)
 
     url_input = wait.until(
         EC.presence_of_element_located((By.NAME, "input"))
@@ -45,7 +49,7 @@ try:
     submit_btn = driver.find_element(By.CSS_SELECTOR, "button[type='submit']")
     submit_btn.click()
 
-    time.sleep(5)
+    time.sleep(8)
 
     # Close popup if exists
     try:
@@ -87,7 +91,7 @@ try:
                 driver.switch_to.window(driver.window_handles[-1])
 
                 wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
-                time.sleep(2)
+                time.sleep(3)
 
                 try:
                     name = wait.until(
@@ -96,7 +100,7 @@ try:
                 except:
                     name = "unknown"
 
-                invalid_chars = r'<>:"/\|?*'
+                invalid_chars = r'<>:"/\\|?*'
                 for char in invalid_chars:
                     name = name.replace(char, "")
 
@@ -118,10 +122,11 @@ try:
                 driver.switch_to.window(main_tab)
 
             except Exception as e:
-                print("Error:", e)
+                print("Profile Error:", e)
                 driver.switch_to.window(main_tab)
                 continue
 
+        # Next page
         try:
             next_btn = driver.find_element(By.CSS_SELECTOR, "a[rel='next']")
             next_url = next_btn.get_attribute("href")
@@ -131,7 +136,7 @@ try:
 
             driver.get(next_url)
             page_number += 1
-            time.sleep(3)
+            time.sleep(5)
 
         except:
             break
