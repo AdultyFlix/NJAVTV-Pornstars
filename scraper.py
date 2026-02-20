@@ -9,7 +9,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
 # ================= SETTINGS =================
-page_number = 1
+page_number = 63
 MAIN_URL = "https://njavtv.com/en/actresses?page=" + str(page_number)
 PROXY_URL = "https://proxyorb.com/"
 SAVE_FOLDER = "pornstars"
@@ -20,11 +20,10 @@ if not os.path.exists(SAVE_FOLDER):
 
 # ================= CHROME OPTIONS =================
 options = Options()
-options.add_argument("--start-maximized")
-options.add_argument("--user-data-dir=C:/selenium-profile")
-options.add_argument("--remote-debugging-port=9222")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
+options.add_argument("--disable-gpu")
+options.add_argument("--window-size=1920,1080")
 
 # Auto install correct ChromeDriver
 service = Service(ChromeDriverManager().install())
